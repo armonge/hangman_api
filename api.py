@@ -1,6 +1,6 @@
 import random
 from flask_restful import Resource
-from flask import  request
+from flask import request
 
 phrases = [
     '3dhubs',
@@ -9,13 +9,14 @@ phrases = [
     'filament',
     'order',
     'layer'
-];
+]
+
 
 class Phrase(Resource):
     def get(self):
         phrase = random.choice(phrases)
-        letters = [{ 'letter': l, 'revealed': False} for l in phrase]
-        return { 'phrase': { 'letters': letters, 'errorCount': 0 }}
+        letters = [{'letter': l, 'revealed': False} for l in phrase]
+        return {'phrase': {'letters': letters, 'errorCount': 0}}
 
     def post(self):
         letter = request.json['letter']
@@ -29,7 +30,8 @@ class Phrase(Resource):
             if phrase_letter['letter'] == letter:
                 phrase_letter['revealed'] = True
 
-        return { 'phrase': {'letters': phrase['letters'], 'errorCount': error_count}}
+        return {'phrase': {'letters': phrase['letters'], 'errorCount': error_count}}
+
 
 class Score(Resource):
     def post(self):
@@ -37,4 +39,3 @@ class Score(Resource):
 
     def get(self):
         pass
-
