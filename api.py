@@ -49,7 +49,7 @@ def insert_score(score, username):
         'createdAt': datetime.datetime.today().isoformat()
     }
 
-    r.hmset(f'score:data:{match_id}', match_object)
+    r.hmset('score:data:{}'.format(match_id), match_object)
 
     # add the match_id to a sorted set
     r.zadd('score:table', match_id, score)
