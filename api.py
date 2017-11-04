@@ -53,6 +53,7 @@ def insert_score(score, username):
 
     # add the match_id to a sorted set
     r.zadd('score:table', match_id, score)
+    match_object['rank'] = r.zrank('score:table', match_id)
 
     return match_object
 
